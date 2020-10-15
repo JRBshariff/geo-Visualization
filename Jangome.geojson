@@ -1,0 +1,159 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-ide",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2020-10-15T13:20:03Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728404551",
+        "blockage": "yes",
+        "blockage:material": "solid waste or rubbish",
+        "covered": "no",
+        "depth": "140",
+        "material": "concrete",
+        "profile": "open_rectangular",
+        "waterway": "drain",
+        "width": "135"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.2095893,
+            -6.1720152
+          ],
+          [
+            39.2096556,
+            -6.1718892
+          ],
+          [
+            39.2099992,
+            -6.1713977
+          ],
+          [
+            39.2102641,
+            -6.1710237
+          ],
+          [
+            39.210652,
+            -6.1704627
+          ]
+        ]
+      },
+      "id": "way/728404551"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728404552",
+        "blockage": "yes",
+        "blockage:material": "grass or plants",
+        "covered": "no",
+        "depth": "110",
+        "material": "sand",
+        "profile": "open_rectangular",
+        "waterway": "ditch",
+        "width": "135"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.2099565,
+            -6.1735415
+          ],
+          [
+            39.2100197,
+            -6.1734553
+          ],
+          [
+            39.2100723,
+            -6.173363
+          ],
+          [
+            39.2100928,
+            -6.1732747
+          ],
+          [
+            39.210069,
+            -6.1731819
+          ],
+          [
+            39.2098215,
+            -6.1729983
+          ],
+          [
+            39.2097137,
+            -6.1729087
+          ]
+        ]
+      },
+      "id": "way/728404552"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728404563",
+        "blockage": "yes",
+        "blockage:material": "solid waste or rubbish",
+        "covered": "no",
+        "depth": "150",
+        "material": "concrete",
+        "profile": "open_rectangular",
+        "waterway": "ditch",
+        "width": "200"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.2097137,
+            -6.1729087
+          ],
+          [
+            39.209678,
+            -6.172713
+          ],
+          [
+            39.2096432,
+            -6.1725383
+          ],
+          [
+            39.2095982,
+            -6.1723643
+          ],
+          [
+            39.2095761,
+            -6.17229
+          ],
+          [
+            39.2095893,
+            -6.1720152
+          ]
+        ]
+      },
+      "id": "way/728404563"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6771525787",
+        "addr:district": "Zanzibar Urban",
+        "addr:region": "Zanzibar Urban West Region",
+        "addr:ward": "Jangombe",
+        "amenity": "waste_disposal",
+        "name": "Waste Disposal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.2096197,
+          -6.1726823
+        ]
+      },
+      "id": "node/6771525787"
+    }
+  ]
+}
