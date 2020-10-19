@@ -217,6 +217,24 @@ scale.setUnit('metric');
 //animate
 
 var animationStep = 30;
+
+function enableLineAnimation2(layerId) {
+  var step = 0;
+  let dashArraySeq = [
+    [0, 4, 3],
+    [1, 4, 2],
+    [2, 4, 1],
+    [3, 4, 0],
+    [0, 1, 3, 3],
+    [0, 2, 3, 2],
+    [0, 3, 3, 1]
+  ];
+   setInterval(() => {
+      step = (step + 1) % dashArraySeq.length;
+      map.setPaintProperty(layerId, 'line-dasharray', dashArraySeq[step]);
+    }, 170);
+}
+
 function enableLineAnimation(layerId) {
   var step = 0;
   let dashArraySeq = [
@@ -234,7 +252,6 @@ function enableLineAnimation(layerId) {
     }, animationStep);
 }
 
-var animationStep = 30;
 function enableLineAnimation3(layerId) {
   var step = 0;
   let dashArraySeq = [
@@ -251,6 +268,89 @@ function enableLineAnimation3(layerId) {
       map.setPaintProperty(layerId, 'line-dasharray', dashArraySeq[step]);
     }, animationStep);
 }
+
+function enableLineAnimation4(layerId) {
+  var step = 0;
+  let dashArraySeq = [
+    [0, 4, 3],
+    [1, 4, 2],
+    [2, 4, 1],
+    [3, 4, 0],
+    [0, 1, 3, 3],
+    [0, 2, 3, 2],
+    [0, 3, 3, 1]
+  ];
+   setInterval(() => {
+      step = (step + 1) % dashArraySeq.length;
+      map.setPaintProperty(layerId, 'line-dasharray', dashArraySeq[step]);
+    }, animationStep);
+}
+
+map.on('load', function () {
+
+    map.addLayer({
+        "id": "route1",
+        "type": "line",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+					[
+            39.209678,
+            -6.172713
+          ],
+                       
+          [
+            39.2096432,
+            -6.1725383
+          ],
+          [
+            39.2095982,
+            -6.1723643
+          ],
+          [
+            39.2095761,
+            -6.17229
+          ],
+          [
+            39.2095893,
+            -6.1720152
+          ],
+          [
+            39.2096556,
+            -6.1718892
+          ],
+          [
+            39.2099992,
+            -6.1713977
+          ],
+          [
+            39.2102641,
+            -6.1710237
+          ],
+          [
+            39.210652,
+            -6.1704627
+          ]
+       
+                    ]
+                }
+            }
+        },
+        "layout": {
+        },
+        "paint": {
+            "line-color": "red",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation2('route1');
+});
 
 map.on('load', function () {
 
@@ -505,27 +605,10 @@ map.on('load', function () {
     enableLineAnimation3('route3');
 });
 
-//animate
-function enableLineAnimation2(layerId) {
-  var step = 0;
-  let dashArraySeq = [
-    [0, 4, 3],
-    [1, 4, 2],
-    [2, 4, 1],
-    [3, 4, 0],
-    [0, 1, 3, 3],
-    [0, 2, 3, 2],
-    [0, 3, 3, 1]
-  ];
-   setInterval(() => {
-      step = (step + 1) % dashArraySeq.length;
-      map.setPaintProperty(layerId, 'line-dasharray', dashArraySeq[step]);
-    }, 170);
-}
 map.on('load', function () {
 
     map.addLayer({
-        "id": "route1",
+        "id": "route4",
         "type": "line",
         "source": {
             "type": "geojson",
@@ -535,44 +618,66 @@ map.on('load', function () {
                 "geometry": {
                     "type": "LineString",
                     "coordinates": [
-					[
-            39.209678,
-            -6.172713
-          ],
-                       
-          [
-            39.2096432,
-            -6.1725383
-          ],
-          [
-            39.2095982,
-            -6.1723643
-          ],
-          [
-            39.2095761,
-            -6.17229
-          ],
-          [
-            39.2095893,
-            -6.1720152
-          ],
-          [
-            39.2096556,
-            -6.1718892
-          ],
-          [
-            39.2099992,
-            -6.1713977
-          ],
-          [
-            39.2102641,
-            -6.1710237
-          ],
-          [
-            39.210652,
-            -6.1704627
-          ]
-       
+                       [
+							39.2093702,
+							-6.1718463
+						  ],
+						  [
+							39.2092784,
+							-6.171781
+						  ],
+						  [
+							39.2091255,
+							-6.1716737
+						  ],
+						  [
+							39.209033,
+							-6.1716163
+						  ],
+						  [
+							39.2089089,
+							-6.171523
+						  ],
+						  [
+							39.2087902,
+							-6.1714397
+						  ],
+						  [
+							39.2087071,
+							-6.171381
+						  ],
+						  [
+							39.2085119,
+							-6.171245
+						  ],
+						  [
+							39.2084502,
+							-6.171121
+						  ],
+						  [
+							39.2083302,
+							-6.1709123
+						  ],
+						  [
+							39.2082363,
+							-6.1707963
+						  ],
+						  [
+							39.2080955,
+							-6.1707117
+						  ],
+						  [
+							39.2078474,
+							-6.1705637
+						  ],
+						  [
+							39.2076918,
+							-6.1704197
+						  ],
+						  [
+							39.2075302,
+							-6.1702657
+						  ]
                     ]
                 }
             }
@@ -580,12 +685,12 @@ map.on('load', function () {
         "layout": {
         },
         "paint": {
-            "line-color": "red",
+            "line-color": "#73B6FE",
             "line-width": 8,
             "line-dasharray": [0, 2, 3]
         }
     });
-    enableLineAnimation2('route1');
+    enableLineAnimation4('route4');
 });
 
 

@@ -1,0 +1,120 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-ide",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2020-10-19T09:01:02Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728318041",
+        "blockage": "no",
+        "covered": "yes",
+        "material": "concrete",
+        "waterway": "underground_drain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.2093702,
+            -6.1718463
+          ],
+          [
+            39.2092784,
+            -6.171781
+          ],
+          [
+            39.2091255,
+            -6.1716737
+          ],
+          [
+            39.209033,
+            -6.1716163
+          ],
+          [
+            39.2089089,
+            -6.171523
+          ],
+          [
+            39.2087902,
+            -6.1714397
+          ],
+          [
+            39.2087071,
+            -6.171381
+          ],
+          [
+            39.2085119,
+            -6.171245
+          ],
+          [
+            39.2084502,
+            -6.171121
+          ],
+          [
+            39.2083302,
+            -6.1709123
+          ],
+          [
+            39.2082363,
+            -6.1707963
+          ],
+          [
+            39.2080955,
+            -6.1707117
+          ],
+          [
+            39.2078474,
+            -6.1705637
+          ],
+          [
+            39.2076918,
+            -6.1704197
+          ],
+          [
+            39.2075302,
+            -6.1702657
+          ]
+        ]
+      },
+      "id": "way/728318041"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728404561",
+        "blockage": "no",
+        "channels": "1",
+        "covered": "culvert",
+        "depth": "120",
+        "material": "concrete",
+        "profile": "boxed_rectangular",
+        "waterway": "underground_drain",
+        "width": "120"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.2096556,
+            -6.1718892
+          ],
+          [
+            39.2095671,
+            -6.1718201
+          ],
+          [
+            39.2095339,
+            -6.1717972
+          ],
+          [
+            39.2095091,
+            -6.171786
+          ]
+        ]
+      },
+      "id": "way/728404561"
+    }
+  ]
+}
