@@ -1,0 +1,402 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+.marker {
+  background-image: url('lib/images/waste_disposal.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+h2,
+h3 {
+  margin: 10px;
+  font-size: 1.2em;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+p {
+  font-size: 0.85em;
+  margin: 10px;
+  text-align: left;
+}
+
+/**
+* Create a position for the map
+* on the page */
+
+
+/**
+* Set rules for how the map overlays
+* (information box and legend) will be displayed
+* on the page. */
+.map-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  margin-right: 20px;
+  font-family: Arial, sans-serif;
+  overflow: auto;
+  border-radius: 3px;
+}
+
+#features {
+  top: 0;
+  height: 100px;
+  margin-top: 20px;
+  width: 250px;
+}
+
+#legend {
+  padding: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  line-height: 18px;
+  height: 150px;
+  margin-bottom: 120px;
+  margin-right:220px;
+  width: 100px;
+}
+
+.legend-key {
+  display: inline-block;
+  border-radius: 20%;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+}
+</style>
+</head>
+<body>
+<div align="center">
+<h3 >FLOOD RISK ASSESMENT</h3>
+<hr style="width:400px;">
+<span>THE STATE UNIVERSITY OF ZANZIBAR</span>
+</div>
+<div style='margin-top:10px;'>
+	<div id='map' style='padding:auto;margin:auto;width:1200px;height:600px;border:1px dashed red;'>
+
+	</div>
+<div class='map-overlay' id='legend'></div>
+</div>
+
+</body>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoianJiYXJ0aXN0IiwiYSI6ImNrMG5uaGQ2bjAxZDQzcHM4MWx2ZDQ5amwifQ.lwP_ukc9egUxM3814xKudw';
+var map = new mapboxgl.Map({
+style: 'mapbox://styles/mapbox/light-v10',
+center: [39.21024,-6.173],
+zoom: 18.5,
+pitch: 40,
+bearing: -17.6,
+container: 'map',
+antialias: true
+});
+ 
+// The 'building' layer in the mapbox-streets vector source contains building-height
+// data from OpenStreetMap.
+map.on('load', function () {
+// Insert the layer beneath any symbol layer.
+var layers = map.getStyle().layers;
+ 
+var labelLayerId;
+for (var i = 0; i < layers.length; i++) {
+if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+labelLayerId = layers[i].id;
+break;
+}
+}
+
+var geojson = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [39.2096197,-6.1726823]
+    },
+    properties: {
+      title: 'Mapbox',
+      description: 'Washington, D.C.'
+    }
+  }
+ ]
+};
+	// create the popup
+var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+'Solid Waste point Near Drainage!'
+);
+ 
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker';
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+	.setPopup(popup)
+    .addTo(map);
+	});
+	
+
+ 
+
+
+//var marker = new mapboxgl.Marker()
+//.setLngLat([39.2096197,-6.1726823])
+//.addTo(map);
+
+
+
+ // Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+map.addLayer(
+{
+'id': '3d-buildings',
+'source': 'composite',
+'source-layer': 'building',
+'filter': ['==', 'extrude', 'true'],
+'type': 'fill-extrusion',
+'minzoom': 15,
+'paint': {
+'fill-extrusion-color': '#aaa',
+ 
+// use an 'interpolate' expression to add a smooth transition effect to the
+// buildings as the user zooms in
+'fill-extrusion-height': [
+'interpolate',
+['linear'],
+['zoom'],
+15,
+0,
+15.05,
+['get', 'height']
+],
+'fill-extrusion-base': [
+'interpolate',
+['linear'],
+['zoom'],
+15,
+0,
+15.05,
+['get', 'min_height']
+],
+'fill-extrusion-opacity': 0.6
+}
+},
+labelLayerId
+);
+});
+
+var scale = new mapboxgl.ScaleControl({
+maxWidth: 180,
+unit: 'imperial'
+});
+map.addControl(scale);
+scale.setUnit('metric');
+
+var animationStep = 30;
+
+//animate
+function enableLineAnimation(layerId) {
+  var step = 0;
+  let dashArraySeq = [
+    [0, 4, 3],
+    [1, 4, 2],
+    [2, 4, 1],
+    [3, 4, 0],
+    [0, 1, 3, 3],
+    [0, 2, 3, 2],
+    [0, 3, 3, 1]
+  ];
+   setInterval(() => {
+      step = (step + 1) % dashArraySeq.length;
+      map.setPaintProperty(layerId, 'line-dasharray', dashArraySeq[step]);
+    }, animationStep);
+}
+
+map.on('load', function () {
+
+    map.addLayer({
+        "id": "route",
+        "type": "line",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                       [
+            39.2099565,
+            -6.1735415
+          ],
+          [
+            39.2100197,
+            -6.1734553
+          ],
+          [
+            39.2100723,
+            -6.173363
+          ],
+          [
+            39.2100928,
+            -6.1732747
+          ],
+          [
+            39.210069,
+            -6.1731819
+          ],
+          [
+            39.2098215,
+            -6.1729983
+          ],
+          [
+            39.2097137,
+            -6.1729087
+          ],
+		  [
+            39.2097137,
+            -6.1729087
+          ],
+          [
+            39.209678,
+            -6.172713
+          ]
+       
+                    ]
+                }
+            }
+        },
+        "layout": {
+        },
+        "paint": {
+            "line-color": "#73B6FE",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation('route');
+});
+
+
+function enableLineAnimation2(layerId) {
+  var step = 0;
+  let dashArraySeq = [
+    [0, 4, 3],
+    [1, 4, 2],
+    [2, 4, 1],
+    [3, 4, 0],
+    [0, 1, 3, 3],
+    [0, 2, 3, 2],
+    [0, 3, 3, 1]
+  ];
+   setInterval(() => {
+      step = (step + 1) % dashArraySeq.length;
+      map.setPaintProperty(layerId, 'line-dasharray', dashArraySeq[step]);
+    }, 170);
+}
+map.on('load', function () {
+
+    map.addLayer({
+        "id": "route1",
+        "type": "line",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+					[
+            39.209678,
+            -6.172713
+          ],
+                       
+          [
+            39.2096432,
+            -6.1725383
+          ],
+          [
+            39.2095982,
+            -6.1723643
+          ],
+          [
+            39.2095761,
+            -6.17229
+          ],
+          [
+            39.2095893,
+            -6.1720152
+          ],
+          [
+            39.2096556,
+            -6.1718892
+          ],
+          [
+            39.2099992,
+            -6.1713977
+          ],
+          [
+            39.2102641,
+            -6.1710237
+          ],
+          [
+            39.210652,
+            -6.1704627
+          ]
+       
+                    ]
+                }
+            }
+        },
+        "layout": {
+        },
+        "paint": {
+            "line-color": "red",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation2('route1');
+});
+
+var layers = ['Water Flow','---------------',' ', 'Normal ','-----------', 'Blocked'];
+var colors = ['--','--','--','#73B6FE','---------------', 'red'];
+
+for (i = 0; i < layers.length; i++) {
+  var layer = layers[i];
+  var color = colors[i];
+  var item = document.createElement('div');
+  var key = document.createElement('span');
+  key.className = 'legend-key';
+  key.style.backgroundColor = color;
+
+  var value = document.createElement('span');
+  value.innerHTML = layer;
+  item.appendChild(key);
+  item.appendChild(value);
+  legend.appendChild(item);
+}
+
+
+</script>
+
+</html>

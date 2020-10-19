@@ -9,12 +9,14 @@
  }
 
  .bg-nav{
-	background-color:orange;
+	background: rgb(2,0,36);
+background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(116,116,198,1) 0%, rgba(84,119,0,1) 0%, rgba(13,160,255,1) 0%, rgba(132,170,244,1) 47%);
   }
   
   .list-group a {
-	  	background-color:orange;
-		color:floralwhite;
+	  	background: rgb(2,0,36);
+background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(116,116,198,1) 0%, rgba(84,119,0,1) 0%, rgba(13,160,255,1) 0%, rgba(132,170,244,1) 47%);
+		color:white;
 		
 
   }

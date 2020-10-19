@@ -1,0 +1,37 @@
+$animation-rules: linear infinite leaflet-ant-path-animation
+$engines: "-webkit-", "-moz-", "-ms-", "-o-", ""
+
+@mixin applyEngines($rule, $value)
+  @each $engine in $engines
+    #{$engine+$rule}: $value
+
+=stroke-animation
+  from
+    stroke-dashoffset: 100%
+  to
+    stroke-dashoffset: 0%
+
+@-webkit-keyframes leaflet-ant-path-animation
+  +stroke-animation
+
+@-moz-keyframes leaflet-ant-path-animation
+  +stroke-animation
+
+@-ms-keyframes leaflet-ant-path-animation
+  +stroke-animation
+
+@-o-keyframes leaflet-ant-path-animation
+  +stroke-animation
+
+@keyframes leaflet-ant-path-animation
+  +stroke-animation
+
+path.leaflet-ant-path
+  fill: none
+  @include applyEngines(animation, $animation-rules)
+
+  &__hardware-acceleration
+    @include applyEngines(transform, translateZ(0))
+
+  &__reverse
+    @include applyEngines(animation-direction, reverse)
