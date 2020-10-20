@@ -2,8 +2,13 @@
 <!doctype html>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+<!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+ <link href="css/fontawesome.css" rel="stylesheet">
 <style>
 .marker {
   background-image: url('lib/images/waste_disposal.png');
@@ -62,9 +67,8 @@ p {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   line-height: 18px;
   height: 150px;
-  margin-bottom: 120px;
-  margin-right:220px;
-  width: 100px;
+  margin-bottom: 30px;
+  
 }
 
 .legend-key {
@@ -77,19 +81,30 @@ p {
 </style>
 </head>
 <body>
-<div align="center">
-<h3 >FLOOD RISK ASSESMENT</h3>
-<hr style="width:400px;">
-<span>THE STATE UNIVERSITY OF ZANZIBAR</span>
-</div>
-<div style='margin-top:10px;'>
-	<div id='map' style='padding:auto;margin:auto;width:1200px;height:600px;border:1px dashed red;'>
-
+  <div class="container">
+	<div align="center" class="row">
+		<div class="col-sm-12">
+			<h3 >FLOOD RISK ASSESMENT</h3>
+			<hr style="width:400px;">
+			<span>THE STATE UNIVERSITY OF ZANZIBAR</span>
+		</div>
 	</div>
-<div class='map-overlay' id='legend'></div>
-</div>
+	<div class="row" style='margin-top:10px;'>
+		<div class="col-sm-12">
+			<div id='map' style="width:100%;height:600px;border:1px dashed red;">
 
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class='map-overlay' id='legend'>
+				Water Flow
+			</div>
+		</div>
+	</div>
+  </div>
+	
 </body>
+
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoianJiYXJ0aXN0IiwiYSI6ImNrMG5uaGQ2bjAxZDQzcHM4MWx2ZDQ5amwifQ.lwP_ukc9egUxM3814xKudw';
 var map = new mapboxgl.Map({
@@ -133,13 +148,10 @@ var geojson = {
 };
 	// create the popup
 var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-'Solid Waste point Near Drainage!'
+'Solid Waste at Jangombe'
 );
- 
-// create DOM element for the marker
-var el = document.createElement('div');
-el.id = 'marker';
-// add markers to map
+
+
 geojson.features.forEach(function(marker) {
 
   // create a HTML element for each feature
@@ -232,7 +244,7 @@ function enableLineAnimation2(layerId) {
    setInterval(() => {
       step = (step + 1) % dashArraySeq.length;
       map.setPaintProperty(layerId, 'line-dasharray', dashArraySeq[step]);
-    }, 170);
+    }, 380);
 }
 
 function enableLineAnimation(layerId) {
@@ -697,8 +709,8 @@ map.on('load', function () {
 
 /////
 
-var layers = ['Water Flow','---------------',' ', 'Normal ','-----------', 'Blocked'];
-var colors = ['--','--','--','#73B6FE','---------------', 'red'];
+var layers = [' ', 'Normal ','-----------', 'Blocked'];
+var colors = ['--','#73B6FE','---------------', 'red'];
 
 for (i = 0; i < layers.length; i++) {
   var layer = layers[i];
@@ -718,4 +730,8 @@ for (i = 0; i < layers.length; i++) {
 
 </script>
 
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </html>
