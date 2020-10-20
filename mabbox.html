@@ -110,7 +110,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoianJiYXJ0aXN0IiwiYSI6ImNrMG5uaGQ2bjAxZDQzcHM4M
 var map = new mapboxgl.Map({
 style: 'mapbox://styles/mapbox/light-v10',
 center: [39.21013,-6.172],
-zoom: 17.5,
+zoom: 15.5,
 pitch: 40,
 bearing: -17.6,
 container: 'map',
@@ -131,7 +131,7 @@ break;
 }
 }
 
-var geojson = {
+var dump1 = {
   type: 'FeatureCollection',
   features: [{
     type: 'Feature',
@@ -141,7 +141,22 @@ var geojson = {
     },
     properties: {
       title: 'Mapbox',
-      description: 'Washington, D.C.'
+      description: 'Jangombe '
+    }
+  }
+ ]
+};
+var dump2 = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [39.217425,-6.1630639 ]
+    },
+    properties: {
+      title: 'Mapbox',
+      description: 'Sebleni '
     }
   }
  ]
@@ -149,10 +164,13 @@ var geojson = {
 	// create the popup
 var popup = new mapboxgl.Popup({ offset: 25 }).setText(
 'Solid Waste at Jangombe'
+);	// create the popup
+var popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
+'Solid Waste at Sebleni'
 );
 
 
-geojson.features.forEach(function(marker) {
+dump1.features.forEach(function(marker) {
 
   // create a HTML element for each feature
   var el = document.createElement('div');
@@ -162,6 +180,19 @@ geojson.features.forEach(function(marker) {
   new mapboxgl.Marker(el)
     .setLngLat(marker.geometry.coordinates)
 	.setPopup(popup)
+    .addTo(map);
+	});
+	
+dump2.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var e2 = document.createElement('div');
+  e2.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(e2)
+    .setLngLat(marker.geometry.coordinates)
+	.setPopup(popup1)
     .addTo(map);
 	});
 	
@@ -177,43 +208,43 @@ geojson.features.forEach(function(marker) {
 
  // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
-map.addLayer(
-{
-'id': '3d-buildings',
-'source': 'composite',
-'source-layer': 'building',
-'filter': ['==', 'extrude', 'true'],
-'type': 'fill-extrusion',
-'minzoom': 15,
-'paint': {
-'fill-extrusion-color': '#aaa',
- 
-// use an 'interpolate' expression to add a smooth transition effect to the
-// buildings as the user zooms in
-'fill-extrusion-height': [
-'interpolate',
-['linear'],
-['zoom'],
-15,
-0,
-15.05,
-['get', 'height']
-],
-'fill-extrusion-base': [
-'interpolate',
-['linear'],
-['zoom'],
-15,
-0,
-15.05,
-['get', 'min_height']
-],
-'fill-extrusion-opacity': 0.6
-}
-},
-labelLayerId
-);
-});
+	map.addLayer(
+			{
+				'id': '3d-buildings',
+				'source': 'composite',
+				'source-layer': 'building',
+				'filter': ['==', 'extrude', 'true'],
+				'type': 'fill-extrusion',
+				'minzoom': 15,
+				'paint': {
+				'fill-extrusion-color': '#aaa',
+							 
+				// use an 'interpolate' expression to add a smooth transition effect to the
+				// buildings as the user zooms in
+				'fill-extrusion-height': [
+				'interpolate',
+				['linear'],
+				['zoom'],
+				15,
+				0,
+				15.05,
+				['get', 'height']
+				],
+				'fill-extrusion-base': [
+				'interpolate',
+				['linear'],
+				['zoom'],
+				15,
+				0,
+				15.05,
+				['get', 'min_height']
+				],
+				'fill-extrusion-opacity': 0.6
+				}
+				},
+				labelLayerId
+				);
+		});
 
 var scale = new mapboxgl.ScaleControl({
 maxWidth: 180,
@@ -421,12 +452,12 @@ map.on('load', function () {
         "layout": {
         },
         "paint": {
-            "line-color": "#73B6FE",
+            "line-color": "red",
             "line-width": 8,
             "line-dasharray": [0, 2, 3]
         }
     });
-    enableLineAnimation('route');
+    enableLineAnimation2('route');
 });
 
 map.on('load', function () {
@@ -689,7 +720,103 @@ map.on('load', function () {
 						  [
 							39.2075302,
 							-6.1702657
-						  ]
+						  ],
+						  [
+            39.2075302,
+            -6.1702657
+          ],
+          [
+            39.2074722,
+            -6.1702173
+          ],
+          [
+            39.2074384,
+            -6.1701843
+          ],
+          [
+            39.2073636,
+            -6.1701193
+          ],
+          [
+            39.2072808,
+            -6.1700417
+          ],
+          [
+            39.207197,
+            -6.1699763
+          ],
+          [
+            39.2071309,
+            -6.1699243
+          ],
+          [
+            39.2070444,
+            -6.169864
+          ],
+          [
+            39.206969,
+            -6.1697967
+          ],
+          [
+            39.2069257,
+            -6.1697493
+          ],
+          [
+            39.2069013,
+            -6.169741
+          ],
+          [
+            39.206849,
+            -6.1697513
+          ],
+          [
+            39.2067651,
+            -6.1697573
+          ],
+          [
+            39.2066756,
+            -6.1697653
+          ],
+          [
+            39.2066082,
+            -6.1697677
+          ],
+          [
+            39.2065405,
+            -6.169776
+          ],
+          [
+            39.2064899,
+            -6.1697787
+          ],
+          [
+            39.2064612,
+            -6.1697842
+          ],
+          [
+            39.2064208,
+            -6.169789
+          ],
+          [
+            39.2063434,
+            -6.1698007
+          ],
+          [
+            39.2062669,
+            -6.1698163
+          ],
+          [
+            39.206219,
+            -6.1698263
+          ],
+          [
+            39.2061422,
+            -6.169842
+          ],
+          [
+            39.2060949,
+            -6.1698477
+          ]
                     ]
                 }
             }
@@ -703,6 +830,626 @@ map.on('load', function () {
         }
     });
     enableLineAnimation4('route4');
+});
+
+map.on('load', function () {
+
+    map.addLayer({
+        "id": "route5",
+        "type": "line",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                       [
+							39.2091128,
+							-6.1694376
+						  ],
+						  [
+							39.2090045,
+							-6.1694252
+						  ],
+						  [
+							39.2089723,
+							-6.1694248
+						  ],
+						  [
+							39.2089391,
+							-6.1694273
+						  ],
+						  [
+							39.2088913,
+							-6.1694278
+						  ],
+						  [
+							39.2088643,
+							-6.1694305
+						  ],
+						  [
+							39.2088392,
+							-6.1694313
+						  ],
+						  [
+							39.2087813,
+							-6.1694347
+						  ],
+						  [
+							39.208746,
+							-6.169442
+						  ],
+						  [
+							39.2086943,
+							-6.169446
+						  ],
+						  [
+							39.2086383,
+							-6.1694545
+						  ],
+						  [
+							39.2085865,
+							-6.1694648
+						  ],
+						  [
+							39.2085371,
+							-6.1694697
+						  ],
+						  [
+							39.208471,
+							-6.1694827
+						  ],
+						  [
+							39.2083718,
+							-6.1695007
+						  ],
+						  [
+							39.208348,
+							-6.1694997
+						  ],
+						  [
+							39.208296,
+							-6.1695073
+						  ],
+						  [
+							39.2082960, -6.1695073,
+						  ],
+						  [
+							 39.2082132,-6.1695173
+						  ],
+						  [
+							 39.2080992,-6.1695427
+						  ],
+						  [
+							39.2080992,
+							-6.1695427
+						  ],
+						  [
+							39.2080362,
+							-6.1695463
+						  ],
+						  [
+							39.2079554,
+							-6.169557
+						  ],
+						  [
+							39.2079054,
+							-6.1695697
+						  ],
+						  [
+							39.2078451,
+							-6.16958
+						  ],								  
+						  [
+							39.2077924,
+							-6.169592
+						  ],
+						  [
+							39.2077924,
+							-6.169592
+						  ],
+						  [
+							39.2077468,
+							-6.1696003
+						  ],
+						  [
+							39.2076972,
+							-6.169608
+						  ],
+						  [
+							39.207655,
+							-6.1696167
+						  ],
+						  [
+							39.2076043,
+							-6.169627
+						  ],
+						  [
+							39.2075463,
+							-6.169634
+						  ],
+						  [
+							39.2074645,
+							-6.1696517
+						  ],
+						  [
+							39.207427,
+							-6.1696573
+						  ],
+						  [
+							39.2073589,
+							-6.1696717
+						  ],
+						  [
+							39.207317,
+							-6.169678
+						  ],
+						  [
+							39.2072593,
+							-6.169688
+						  ],
+						  [
+							39.2072037,
+							-6.1696963
+						  ],
+						  [
+							39.2071353,
+							-6.16971
+						  ],
+						  [
+							39.2070719,
+							-6.1697187
+						  ],
+						  [
+							39.207027,
+							-6.1697223
+						  ],
+						  [
+							39.2069727,
+							-6.169726
+						  ],
+						  [
+							39.2069261,
+							-6.1697357
+						  ],
+						  [
+							39.2069013,
+							-6.169741
+						  ]
+          
+                    ]
+                }
+            }
+        },
+        "layout": {
+        },
+        "paint": {
+            "line-color": "#73B6FE",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation4('route5');
+});
+
+map.on('load', function () {
+
+    map.addLayer({
+        "id": "route6",
+        "type": "line",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                       [
+							39.2077837,
+							-6.17019
+						  ],
+						  [
+							39.2077867,
+							-6.1701617
+						  ],
+						  [
+							39.2077864,
+							-6.170125
+						  ],
+						  [
+							39.2077864,
+							-6.1700723
+						  ],
+						  [
+							39.2077928,
+							-6.1699947
+						  ],
+						  [
+							39.2077934,
+							-6.1699493
+						  ],
+						  [
+							39.2077954,
+							-6.1698713
+						  ],
+						  [
+							39.2077941,
+							-6.1698257
+						  ],
+						  [
+							39.2077737,
+							-6.1697887
+						  ],
+						  [
+							39.2077556,
+							-6.169723
+						  ],
+						  [
+							39.2077495,
+							-6.1696633
+						  ],
+						  [
+							39.2077475,
+							-6.169628
+						  ],
+						  [
+							39.2077468,
+							-6.1696003
+						  ]
+          
+                    ]
+                }
+            }
+        },
+        "layout": {
+        },
+        "paint": {
+            "line-color": "#73B6FE",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation4('route6');
+});
+
+map.on('load', function () {
+
+    map.addLayer({
+        "id": "route7",
+        "type": "line",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+						[
+						39.2103054,
+						-6.1750645
+					  ],
+					  [
+						39.2101731,
+						-6.1749628
+					  ],
+                       [
+						39.2101731,
+						-6.1749628
+					  ],
+					  [
+						39.2103684,
+						-6.1746181
+					  ]
+                    ]
+                }
+            }
+        },
+        "layout": {
+        },
+        "paint": {
+            "line-color": "#73B6FE",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation4('route7');
+});
+
+map.on('load', function () {
+
+    map.addLayer({
+        "id": "route8",
+        "type": "line",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+						[
+            39.215142,
+            -6.1708137
+          ],
+          [
+            39.2152044,
+            -6.170837
+          ],
+          [
+            39.2152604,
+            -6.1708713
+          ],
+          [
+            39.2153144,
+            -6.1708987
+          ],
+          [
+            39.2153854,
+            -6.1709283
+          ],
+          [
+            39.2154615,
+            -6.1709597
+          ],
+          [
+            39.2155088,
+            -6.1709817
+          ],
+          [
+            39.2155856,
+            -6.1709817
+          ],
+          [
+            39.2156486,
+            -6.170972
+          ],
+          [
+            39.2157076,
+            -6.1709813
+          ],
+          [
+            39.2157868,
+            -6.1710047
+          ],
+          [
+            39.215835,
+            -6.1710313
+          ],
+          [
+            39.2158478,
+            -6.1710523
+          ],
+          [
+            39.2159272,
+            -6.171075
+          ],
+          [
+            39.216002,
+            -6.1710807
+          ],
+          [
+            39.2160563,
+            -6.1711183
+          ],
+          [
+            39.2160406,
+            -6.1711647
+          ],
+          [
+            39.2160171,
+            -6.171222
+          ],
+          [
+            39.2159976,
+            -6.171278
+          ],
+          [
+            39.2160838,
+            -6.1713093
+          ],
+          [
+            39.2161358,
+            -6.1713293
+          ],
+          [
+            39.2161888,
+            -6.1713523
+          ],
+          [
+            39.2162494,
+            -6.1713797
+          ],
+          [
+            39.2163135,
+            -6.1713953
+          ],
+          [
+            39.2163721,
+            -6.1714097
+          ],
+          [
+            39.2164496,
+            -6.1714283
+          ],
+          [
+            39.2164939,
+            -6.1714413
+          ],
+          [
+            39.2165396,
+            -6.1714549
+          ],
+						[
+							39.2165396,
+							-6.1714549
+						  ],
+						  [
+							39.2165713,
+							-6.1714737
+						  ],
+						  [
+							39.2165985,
+							-6.1714837
+						  ],
+						  [
+							39.2166008,
+							-6.17152
+						  ],
+						  [
+							39.2166192,
+							-6.1715457
+						  ],
+						  [
+							39.2166598,
+							-6.1715667
+						  ],
+						  [
+							39.2167161,
+							-6.1715693
+						  ],
+						  [
+							39.2167587,
+							-6.171558
+						  ],
+						  [
+							39.2168093,
+							-6.1715383
+						  ],
+						  [
+							39.2168627,
+							-6.1715367
+						  ],
+						  [
+							39.216861,
+							-6.1715173
+						  ],
+						  [
+							39.2169257,
+							-6.171515
+						  ],
+						  [
+							39.2169746,
+							-6.171535
+						  ],
+						  [
+							39.2170296,
+							-6.1715557
+						  ],
+						  [
+							39.2170792,
+							-6.171559
+						  ],
+						  [
+							39.2171872,
+							-6.171563
+						  ],
+						  [
+							39.2173099,
+							-6.171547
+						  ],
+						  [
+							39.2174025,
+							-6.1715237
+						  ],
+						  [
+							39.2174487,
+							-6.171517
+						  ],
+						  [
+							39.217489,
+							-6.1715157
+						  ],
+						  [
+							39.2175476,
+							-6.171495
+						  ],
+						  [
+							39.217663,
+							-6.171476
+						  ],
+						  [
+							39.2179365,
+							-6.1713717
+						  ]
+                    ]
+                }
+            }
+        },
+        "layout": {
+        },
+        "paint": {
+            "line-color": "#73B6FE",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation4('route8');
+});
+
+map.on('load', function () {
+
+    map.addLayer({
+        "id": "route9",
+        "type": "line",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+						 [
+						39.2096934,
+						-6.1683353
+					  ],
+					  [
+						39.2094494,
+						-6.1688597
+					  ],
+					  
+					  [
+						39.2094192,
+						-6.1689403
+					  ],
+					  [
+						39.2093354,
+						-6.169115
+					  ],
+					  [
+						39.2093132,
+						-6.169175
+					  ],
+					  [
+						39.209264,
+						-6.169278
+					  ],
+					  [
+						39.2092536,
+						-6.1693293
+					  ],
+					  [
+						39.2092757,
+						-6.1693847
+					  ]
+                    ]
+                }
+            }
+        },
+        "layout": {
+        },
+        "paint": {
+            "line-color": "#73B6FE",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation4('route9');
 });
 
 
