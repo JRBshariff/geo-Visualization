@@ -161,10 +161,9 @@ var dump2 = {
   }
  ]
 };
-	// create the popup
 var popup = new mapboxgl.Popup({ offset: 25 }).setText(
 'Solid Waste at Jangombe'
-);	// create the popup
+);	
 var popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
 'Solid Waste at Sebleni'
 );
@@ -201,8 +200,6 @@ dump2.features.forEach(function(marker) {
 
 
 //var marker = new mapboxgl.Marker()
-//.setLngLat([39.2096197,-6.1726823])
-//.addTo(map);
 
 
 
@@ -247,18 +244,14 @@ map.addControl(new mapboxgl.NavigationControl());
 		});
 
 var scale = new mapboxgl.ScaleControl({
-maxWidth: 180,
-unit: 'imperial'
+	maxWidth: 180,
+	unit: 'imperial'
 });
-map.addControl(scale);
-scale.setUnit('metric');
-
-
-
+	map.addControl(scale);
+	scale.setUnit('metric');
 
 
 //animate
-
 var animationStep = 30;
 
 function enableLineAnimation2(layerId) {
@@ -452,12 +445,12 @@ map.on('load', function () {
         "layout": {
         },
         "paint": {
-            "line-color": "red",
+            "line-color": "#73B6FE",
             "line-width": 8,
             "line-dasharray": [0, 2, 3]
         }
     });
-    enableLineAnimation2('route');
+    enableLineAnimation('route');
 });
 
 map.on('load', function () {
