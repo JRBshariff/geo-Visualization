@@ -24,6 +24,9 @@
    <script src="L.Polyline.SnakeAnim.js"></script>
    
 <style>
+#MyPopup {
+  display:none;  
+}
 .marker {
   background-image: url('lib/images/waste_disposal.png');
   background-size: cover;
@@ -195,10 +198,37 @@ p {
 		</div>
 		
     </div>
-    <!-- /#page-content-wrapper -->
+ <!-- /#page-content-wrapper -->
+ 
+ 
+ <!-- /Tutorial modal-->
+ 
+	
+			<!-- Modal -->
+				<div id="myModal" class="modal  fade" role="dialog">
+				  <div class="modal-dialog modal-lg">
 
+					<!-- Modal content-->
+					<div class="modal-content">
+					  <div class="modal-header">
+					  		<span align="center">This tutorial appear after 10 minutes!</span>
+
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					  </div>
+					  <div class="modal-body" >
+							<img src="tut.gif" height="400"  width="100%"/>
+					  </div>
+					  
+					</div>
+
+				  </div>
+				</div>
+	
+<!-- /Tutorial modal-->
+
+	
   </div>
-  <!-- /#wrapper -->
+  
 </div>
   
   
@@ -4700,6 +4730,29 @@ map.addSource('maine', {
  
 </script>
   <!-- Bootstrap core JavaScript -->
+  
+  <script>
+
+
+var timeIntervalToAssumeNewSiteVisit = 10*60*1000; //in milliseconds
+$(document).ready(function() {  
+
+  var currentTime = new Date().getTime();
+    var lastVisitTime = parseInt( localStorage.getItem("lastVisitTime") );
+
+    if( isNaN( lastVisitTime ) || ( currentTime - lastVisitTime )  >= timeIntervalToAssumeNewSiteVisit )
+      {
+        $('#myModal').modal('show'); 
+      }
+  
+       localStorage.setItem("lastVisitTime", currentTime);
+
+});
+
+
+
+  </script>
+  
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
