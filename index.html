@@ -1950,39 +1950,46 @@ class MapboxGLButtonControl {
   }
 }
 
-// Event Handlers
 
-var areax=39.217425; 
+var areax=39.2096197; 
 function one(event) {
   console.log("event number 1", event);
 	//sebleni another 39.2168201,-6.166791
 	//sebleni 39.217425,-6.1630639
 	//jangombe 39.2096197,-6.1726823
 	
-	if(areax==39.217425){
+	if(areax==39.2096197){
 		areax=39.2168201;	
-		
 		map.flyTo({
 			center: [
 			39.2168201,-6.166791
 			],
-			essential: true // this animation is considered essential with respect to prefers-reduced-motion
+			essential: true 
 		});
 	}else if(areax==39.2168201){
-		areax=39.217425;	
+		areax=39.217425;
+		
 		map.flyTo({
 			center: [
 			39.217425,-6.1630639
 			],
-			essential: true // this animation is considered essential with respect to prefers-reduced-motion
+			essential: true 
 		});
-	}else {
-	
+	}else if(areax==39.217425){
+		areax=39.2093199; 
+		map.flyTo({
+			center: [
+			39.2093199,-6.1646403
+			],
+			essential: true 
+		});
+	}else{
+		areax=39.2096197;
 		map.flyTo({
 			center: [
 			39.2096197,-6.1726823
 			],
-			essential: true // this animation is considered essential with respect to prefers-reduced-motion
+			essential: true 
 		});
 	}
 }
@@ -2073,6 +2080,44 @@ map.on('load', function () {
         }
     });
     enableLineAnimation4('ReddrainageSeb1');
+	
+	map.addSource('kwaalimsha', {
+	'type': 'geojson',
+	'data': drainage4
+	});
+	
+	  map.addLayer({
+        "id": "drainkwaali",
+        "type": "line",
+        "source": 'kwaalimsha',
+        "layout": {
+        },
+        "paint": {
+            "line-color": "#73B6FE",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation('drainkwaali');
+
+	map.addSource('kwaalimsha1', {
+	'type': 'geojson',
+	'data': drainage5
+	});
+	
+	  map.addLayer({
+        "id": "drainkwaali1",
+        "type": "line",
+        "source": 'kwaalimsha1',
+        "layout": {
+        },
+        "paint": {
+            "line-color": "red",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation2('drainkwaali1');
 
 });
 

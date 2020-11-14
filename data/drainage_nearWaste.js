@@ -246,6 +246,7 @@ var drainage2 =
 
 var drainage3 =
 {
+	
 		'type': 'FeatureCollection',
 		'features': [
 {
@@ -306,3 +307,258 @@ var drainage3 =
     }
 		]
 }
+
+
+var drainage4 =
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-ide",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2020-11-14T20:54:02Z",
+  "features": [
+
+    
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728046757",
+        "blockage": "yes",
+        "blockage:material": "dirt",
+        "covered": "no",
+        "depth": "35 cm",
+        "material": "concrete",
+        "profile": "open_rectangular",
+        "waterway": "drain",
+        "width": "60 cm"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.2101615,
+            -6.1670536
+          ],
+          [
+            39.2100871,
+            -6.1669103
+          ],
+          [
+            39.2100368,
+            -6.1667576
+          ],
+          [
+            39.2099221,
+            -6.1662963
+          ],
+          [
+            39.209796,
+            -6.165735
+          ],
+          [
+            39.2097404,
+            -6.1655136
+          ],
+          [
+            39.2096934,
+            -6.1652956
+          ],
+          [
+            39.2096981,
+            -6.165249
+          ],
+          [
+            39.2095546,
+            -6.1650196
+          ],
+          [
+            39.209482,
+            -6.1649276
+          ],
+          [
+            39.2094011,
+            -6.1648243
+          ]
+        ]
+      },
+      "id": "way/728046757"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728046758",
+        "blockage": "yes",
+        "blockage:material": "dirt",
+        "covered": "no",
+        "depth": "30 cm",
+        "material": "concrete",
+        "profile": "open_rectangular",
+        "waterway": "drain",
+        "width": "80 cm"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.20981,
+            -6.1663306
+          ],
+          [
+            39.2097699,
+            -6.1660743
+          ],
+          [
+            39.2096901,
+            -6.165693
+          ],
+          [
+            39.2096096,
+            -6.1653336
+          ],
+          [
+            39.209556,
+            -6.1652076
+          ],
+          [
+            39.2094614,
+            -6.165051
+          ],
+          [
+            39.2093267,
+            -6.164887
+          ],
+          [
+            39.2092663,
+            -6.16482
+          ],
+          [
+            39.2092328,
+            -6.1648065
+          ],
+          [
+            39.2092004,
+            -6.1647895
+          ],
+          [
+            39.2091749,
+            -6.1647855
+          ]
+        ]
+      },
+      "id": "way/728046758"
+    }
+   
+    
+  ]
+}
+
+
+
+var drainage5 =
+{
+  "type": "FeatureCollection",
+  "features": [
+    
+      { "type": "Feature", "properties": { "id": "way\/728046732", "@id": "way\/728046732", "waterway": "drain", "blockage": "yes", "blockage:material": "dirt", "covered": "no", "depth": "75 cm", "material": "concrete", "profile": "open_rectangular", "width": "120 cm", "width_bottom": null, "width_top": null }, "geometry": { "type": "LineString", "coordinates": [ [ 39.2093313, -6.1647403 ], [ 39.2092834, -6.164702 ] ] } }
+,
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728046759",
+        "blockage": "yes",
+        "blockage:material": "rubish or solid_waste",
+        "covered": "no",
+        "depth": "120 cm",
+        "material": "concrete",
+        "profile": "open_rectangular",
+        "waterway": "drain",
+        "width": "160 cm"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.2091895,
+            -6.164766
+          ],
+          [
+            39.2091749,
+            -6.1647855
+          ],
+          [
+            39.209043,
+            -6.1649556
+          ],
+          [
+            39.2089525,
+            -6.1651343
+          ],
+          [
+            39.2088331,
+            -6.1650783
+          ]
+        ]
+      },
+      "id": "way/728046759"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728046760",
+        "blockage": "yes",
+        "blockage:material": "dirt",
+        "covered": "no",
+        "depth": "35 cm",
+        "material": "concrete",
+        "profile": "open_rectangular",
+        "waterway": "drain",
+        "width": "60 cm"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.2092643,
+            -6.1646796
+          ],
+          [
+            39.2092301,
+            -6.164644
+          ],
+          [
+            39.2088043,
+            -6.1642649
+          ],
+          [
+            39.2088398,
+            -6.1642221
+          ]
+        ]
+      },
+      "id": "way/728046760"
+    },
+	{
+      "type": "Feature",
+      "properties": {
+        "@id": "way/728046731",
+        "waterway": "drain:culvert_entrance"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.2092714,
+            -6.1646879
+          ],
+          [
+            39.2091895,
+            -6.164766
+          ]
+        ]
+      },
+      "id": "way/728046731"
+    }
+	
+	]
+}	
+    
+   
