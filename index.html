@@ -21,7 +21,7 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  
 
-   <script src="L.Polyline.SnakeAnim.js"></script>
+   <!--<script src="L.Polyline.SnakeAnim.js"></script>-->
    
 <style>
 #MyPopup {
@@ -95,17 +95,7 @@ p {
 
   <div class="d-flex" id="wrapper">
 
-    <!-- Sidebar 
-    <div class=" border-right bg-nav" id="sidebar-wrapper" >
-      <div class="sidebar-heading text-white " >Menu </div>
-      <div class="list-group list-group-flush" style="margin-top:50px">
-		<a href="index.html" id="sebleni" class="list-group-item list-group-item-action ">MAP SIMULATION</a>
-        <a href="#" id="jangombe" class="list-group-item list-group-item-action ">WASTE DISPOSAL AREA</a>
-        <a href="#" id="flod" class="list-group-item list-group-item-action "> DRAINAGE NEAR WASTE POINT</a>
-      </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
-
+ 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
@@ -236,34 +226,18 @@ p {
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   		<script src="data/buildings_atRisk.js"></script>
+  		<script src="data/drainage_nearWaste.js"></script>
 
 
 <script>
 
-  $("#wrapper").toggleClass("toggled");
-		
-		$("#menu-toggle").click(function(e) {
-			if($( "#menu-toggle i" ).hasClass( "fa fa-long-arrow-right" )){
-				$("#menu-toggle i").removeClass( "fa fa-long-arrow-right" )
-				$("#menu-toggle i").addClass("fa fa-long-arrow-left");
-				 e.preventDefault();
-				$("#wrapper").toggleClass("toggled");
-				
-			 }else if($( "#menu-toggle i" ).hasClass( "fa fa-long-arrow-left" )){
-			 	$("#menu-toggle i").removeClass( "fa fa-long-arrow-left" )
-			 	$("#menu-toggle i").addClass("fa fa-long-arrow-right");
-				
-				 e.preventDefault();
-				$("#wrapper").toggleClass("toggled");
-			 }
-		});
-		
-	
+
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoianJiYXJ0aXN0IiwiYSI6ImNrMG5uaGQ2bjAxZDQzcHM4MWx2ZDQ5amwifQ.lwP_ukc9egUxM3814xKudw';
 var map = new mapboxgl.Map({
-style: 'mapbox://styles/mapbox/light-v10',
+//style: 'mapbox://styles/mapbox/streets-v11',
+style: 'mapbox://styles/jrbartist/ckhgshg741rh719o0cojcrrhm',
 center: [39.21013,-6.172],
 zoom: 17.5,
 pitch: 40,
@@ -316,13 +290,6 @@ var dump2 = {
   }
  ]
 };
-var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-'Solid Waste at Jangombe'
-);	
-var popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
-'Solid Waste at Sebleni'
-);
-
 var dump3 = {
   type: 'FeatureCollection',
   features: [{
@@ -338,62 +305,65 @@ var dump3 = {
   }
  ]
 };
-var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-'Solid Waste at Jangombe'
-);	
-var popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
-'Solid Waste at Sebleni'
-);
+
+var dump4 = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [39.2093199,-6.1646403 ]
+    },
+    properties: {
+      title: 'Mapbox',
+      description: 'Kwaalimsha '
+    }
+  }
+ ]
+};
+
 
 
 dump1.features.forEach(function(marker) {
-
-  // create a HTML element for each feature
   var el = document.createElement('div');
   el.className = 'marker';
-
-  // make a marker for each feature and add to the map
   new mapboxgl.Marker(el)
     .setLngLat(marker.geometry.coordinates)
-	.setPopup(popup)
-    .addTo(map);
+	.setPopup(new mapboxgl.Popup({closeOnClick: true, closeButton: false}).setText("Waste Collection at Jangombe"))
+    .addTo(map)
+	.togglePopup();
 	});
 	
 dump2.features.forEach(function(marker) {
-
-  // create a HTML element for each feature
   var e2 = document.createElement('div');
   e2.className = 'marker';
-
-  // make a marker for each feature and add to the map
   new mapboxgl.Marker(e2)
     .setLngLat(marker.geometry.coordinates)
-	.setPopup(popup1)
-    .addTo(map);
+	.setPopup(new mapboxgl.Popup({closeOnClick: true, closeButton: false}).setText("Waste Collection at Sebleni"))
+    .addTo(map)
+	.togglePopup();
 	});
 	
 dump3.features.forEach(function(marker) {
-
-  // create a HTML element for each feature
   var e2 = document.createElement('div');
   e2.className = 'marker';
-
-  // make a marker for each feature and add to the map
   new mapboxgl.Marker(e2)
     .setLngLat(marker.geometry.coordinates)
-	.setPopup(popup1)
-    .addTo(map);
+	.setPopup(new mapboxgl.Popup({closeOnClick: true, closeButton: false}).setText("Waste Collection at Ziwatuwe"))
+    .addTo(map)
+	.togglePopup();
 	});
 	
+dump4.features.forEach(function(marker) {
+  var e2 = document.createElement('div');
+  e2.className = 'marker';
+  new mapboxgl.Marker(e2)
+    .setLngLat(marker.geometry.coordinates)
+	.setPopup(new mapboxgl.Popup({closeOnClick: true, closeButton: false}).setText("Waste Collection at Kwaalimsha"))
+    .addTo(map)
+	.togglePopup();
+	});
 	
-
-//POLYGON END
- 
-
-
-//var marker = new mapboxgl.Marker()
-
-
 
  // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
@@ -442,138 +412,6 @@ var scale = new mapboxgl.ScaleControl({
 });
 	map.addControl(scale);
 	scale.setUnit('metric');
-
-/*
-//ADD POLYGON1
-map.on('load', function () {
-map.addSource('buffer1', {
-'type': 'geojson',
-'data': {
-'type': 'Feature',
-'geometry': {
-'type': 'Polygon',
-'coordinates': [
-				[
-					[ 39.209579768730258, -6.172731742270713 ],
-				 [ 39.209545678406052, -6.172560604924744 ],
-				 [ 39.209501836465371, -6.172391082754113 ],
-				 [ 39.209480250174735, -6.172318509840357 ], 
-				 [ 39.209476215168486, -6.172285202038662 ],
-				 [ 39.209489415168484, -6.172010402038661 ], 
-				 [ 39.209490664632305, -6.1720043950545 ], 
-				 [ 39.209490745256652, -6.171998260030576 ],
-				 [ 39.209493831549764, -6.171989169625206 ], 
-				 [ 39.209495786531697, -6.171979770757186 ], 
-				 [ 39.209498831102593, -6.171974443881309 ], 
-				 [ 39.209500803607561, -6.171968634041123 ],
-				 [ 39.209567103607561, -6.171842634041123 ], 
-				 [ 39.209573641570564, -6.171831904137631 ], 
-				 [ 39.209917241570565, -6.171340404137632 ], 
-				 [ 39.20991759583665, -6.17133990068751 ], 
-				 [ 39.210182169070798, -6.170966362033042 ],
-				 [ 39.210569747542003, -6.170405827043747 ], 
-				 [ 39.210591347973846, -6.170383193197003 ], 
-				 [ 39.210618885448589, -6.170368342030094 ], 
-				 [ 39.210649664406354, -6.170362727278709 ],
-				 [ 39.2106806719883, -6.170366898553835 ],
-				 [ 39.210708872956253, -6.170380447542 ],
-				 [ 39.210731506803, -6.17040204797384 ], 
-				 [ 39.21074635796991, -6.170429585448589 ],
-				 [ 39.210751972721297, -6.170460364406352 ],
-				 [ 39.210747801446168, -6.170491371988295 ],
-				 [ 39.210734252458003, -6.170519572956253 ],
-				 [ 39.210346352458004, -6.171080572956253 ],
-				 [ 39.210345704163352, -6.17108149931249 ], 
-				 [ 39.21008098207102, -6.171455248132911 ], 
-				 [ 39.209741165127497, -6.171941336688623 ],
-				 [ 39.209688121024655, -6.172042144485876 ],
-				 [ 39.20967680129165, -6.172277800745731 ],
-				 [ 39.209694049825266, -6.172335790159643 ],
-				 [ 39.209695014691164, -6.172339261717803 ],
-				 [ 39.209740014691164, -6.172513261717803 ],
-				 [ 39.209741273152538, -6.172518763962749 ], 
-				 [ 39.209776073152533, -6.172693463962749 ],
-				 [ 39.209776376518235, -6.172695053951448 ], 
-				]
-			]
-		}
-	}
-});
-
-map.addLayer({
-'id': 'buffer1',
-'type': 'fill',
-'source': 'buffer1',
-'layout': {},
-'paint': {
-'fill-color': '#088',
-'fill-opacity': 0.8
-}
-});
-});
-
-
-//ADD POLYGON2
-map.on('load', function () {
-map.addSource('buffer2', {
-'type': 'geojson',
-'data': {
-'type': 'Feature',
-'geometry': {
-'type': 'Polygon',
-'coordinates': [
-				[		
-			[ 39.209478607215132, -6.171796068082247 ], 
-			[ 39.209491683141124, -6.171774608275263 ],
-			 [ 39.209835283141125, -6.171283108275263 ],
-			 [ 39.209835991673302, -6.17128210137502 ], 
-			 [ 39.210100238141564, -6.170909024066119 ],
-			 [ 39.210487495084003, -6.170348954087493 ], 
-			 [ 39.210530695947682, -6.170303686394006 ],
-			 [ 39.210585770897183, -6.170273984060187 ], 
-			 [ 39.210647328812705, -6.170262754557418 ], 
-			 [ 39.210709343976589, -6.170271097107671 ], 
-			 [ 39.210765745912511, -6.170298195084 ], 
-			 [ 39.210811013605998, -6.170341395947681 ],
-			 [ 39.210840715939817, -6.170396470897177 ],
-			 [ 39.210851945442585, -6.170458028812704 ], 
-			 [ 39.210843602892332, -6.170520043976589 ], 
-			 [ 39.210816504916004, -6.170576445912507 ], 
-			 [ 39.210428604916004, -6.171137445912507 ], 
-			 [ 39.2104273083267, -6.17113929862498 ], 
-			 [ 39.210162764142595, -6.17151279626505 ],
-			 [ 39.209826730254946, -6.171993473377328 ],
-			 [ 39.209766292784863, -6.172108331917753 ],
-			 [ 39.209728850796083, -6.17215846749566 ], 
-			 [ 39.209677748603063, -6.172194579052888 ], 
-			 [ 39.209617988444528, -6.172213131738613 ],
-			 [ 39.20955542006115, -6.172212309486691 ],
-			 [ 39.209496168082246, -6.172192192784869 ],
-			 [ 39.209446032504339, -6.172154750796082 ],
-			 [ 39.20940992094711, -6.172103648603067 ],
-			 [ 39.209391368261386, -6.172043888444527 ],
-			 [ 39.209392190513306, -6.171981320061152 ],
-			 [ 39.209412307215132, -6.171922068082247 ],
-			 [ 39.209478607215132, -6.171796068082247 ],
-			 
-				]
-			]
-		}
-	}
-});
-
-map.addLayer({
-'id': 'buffer2',
-'type': 'fill',
-'source': 'buffer2',
-'layout': {},
-'paint': {
-'fill-color': '#088',
-'fill-opacity': 0.8
-}
-});
-});*/
-
 
 //animate
 var animationStep = 30;
@@ -1888,7 +1726,8 @@ map.on('load', function () {
         "type": "line",
         "source": {
             "type": "geojson",
-            "data": {
+            "data": 
+			{
                 "type": "Feature",
                 "properties": {},
                 "geometry": {
@@ -1939,223 +1778,6 @@ map.on('load', function () {
 });
 
 
-//legend
-
-/*var layers = [' ', 'Normal ','-----------', 'Blocked'];
-var colors = ['--','#73B6FE','---------------', 'red'];
-
-for (i = 0; i < layers.length; i++) {
-  var layer = layers[i];
-  var color = colors[i];
-  var item = document.createElement('div');
-  var key = document.createElement('span');
-  key.className = 'legend-key';
-  key.style.backgroundColor = color;
-
-  var value = document.createElement('span');
-  value.innerHTML = layer;
-  item.appendChild(key);
-  item.appendChild(value);
-  legend.appendChild(item);
-}
-*/
-
-//BUFFER POLGON
-map.on('load', function () {
-map.addSource('buffer1', {
-'type': 'geojson',
-'data': {
-'type': 'Feature',
-'geometry': {
-'type': 'Polygon',
-'coordinates': [
-				[
-					 
-					 [ 39.20929620851102, -6.17196394782144 ],
-					 [ 39.209298844498406, -6.171948611957865 ], 
-					 [ 39.209298022515796, -6.171948440983963 ],
-					 [ 39.209299977497729, -6.171939042115943 ],
-					 [ 39.209300914494015, -6.17193656896761 ],
-					 [ 39.209301362504952, -6.171933962492848 ],
-					 [ 39.209304448798065, -6.171924872087478 ],
-					 [ 39.209305243803904, -6.17192514200075 ], 
-					 [ 39.209310756862131, -6.171910590597596 ], 
-					 [ 39.209309448350893, -6.171910146343567 ],
-					 [ 39.209311420855862, -6.171904336503381 ],
-					 [ 39.209323810822696, -6.17187550212337 ],
-					 [ 39.209390110822696, -6.171749502123371 ], 
-					 [ 39.209396311403054, -6.17173856664527 ], 
-					 [ 39.209402849366057, -6.171727836741777 ],
-					 [ 39.209409724711698, -6.171717312412894 ], 
-					 [ 39.209753324711698, -6.171225812412895 ],
-					 [ 39.209753678202603, -6.171225308418077 ],
-					 [ 39.209754032468688, -6.171224804967956 ],
-					 [ 39.209754387509953, -6.171224302062529 ],
-					 [ 39.210018307212408, -6.170851686099087 ],
-					 [ 39.210405242626003, -6.170292081131241 ],
-					 [ 39.210425061735478, -6.170267747293637 ],
-					 [ 39.210446662167321, -6.170245113446892 ],
-					 [ 39.210496412584085, -6.17020716117784 ], 
-					 [ 39.210523950058828, -6.170192310010932 ],
-					 [ 39.210582993413013, -6.170171588982386 ],
-					 [ 39.210613772370777, -6.170165974231002 ],
-					 [ 39.21067632908747, -6.170164512761629 ], 
-					 [ 39.210707336669415, -6.170168684036756 ],
-					 [ 39.210767283261355, -6.170186625185363 ],
-					 [ 39.210795484229308, -6.170200174173528 ],
-					 [ 39.210846952706348, -6.170235761735459 ],
-					 [ 39.210869586553095, -6.170257362167299 ],
-					 
-					 [ 39.21090753882217, -6.170307112584086 ], 
-					 [ 39.210922389989079, -6.170334650058835 ],
-					 [ 39.210943111017613, -6.170393693412994 ],
-					 [ 39.210948725769001, -6.170424472370757 ],
-					 [ 39.210950187238375, -6.170487029087492 ],
-					 [ 39.210946015963245, -6.170518036669435 ],
-					 [ 39.210928074814646, -6.170577983261335 ],
-					 [ 39.210914525826482, -6.170606184229293 ],
-					 [ 39.210898757374004, -6.170633318868759 ],
-					 [ 39.210510857374004, -6.17119431886876 ], 
-					 [ 39.210510211697937, -6.171195247057465 ],
-					 [ 39.210509563403285, -6.171196173413702 ],
-					 [ 39.210508912490049, -6.171197097937471 ],
-					 [ 39.210244546213517, -6.171570344398097 ],
-					 [ 39.209912295382445, -6.172045610065943 ],
-					 [ 39.209885763073977, -6.172096033457601 ],
-					 [ 39.209878203874958, -6.172253402237227 ],
-					 [ 39.209885749475788, -6.172278770478924 ],
-					 [ 39.209886745615599, -6.172282233345068 ],
-					 [ 39.209887710481496, -6.172285704903228 ],
-					 
-					 [ 39.209888644073487, -6.172289185153409 ],
-					 [ 39.209933644073487, -6.17246318515341 ], 
-					 [ 39.209934980191512, -6.172468669636952 ],
-					 [ 39.209936238652887, -6.172474171881897 ],
-					 [ 39.20993741945761, -6.172479691888247 ], 
-					 [ 39.209972219457605, -6.172654391888247 ],
-					 [ 39.209972529257641, -6.1726559806496 ], 
-					 [ 39.209972832623343, -6.172657570638298 ],
-					 [ 39.209973129554719, -6.172659161854343 ],
-					 [ 39.210008829554724, -6.172854861854343 ],
-					 [ 39.210012021959358, -6.172886082701622 ],
-					 [ 39.210012752703825, -6.17291736105974 ], 
-					 [ 39.210004410172971, -6.172979376226236 ],
-					 [ 39.209995439608043, -6.173009349525002 ],
-					 [ 39.209968341649351, -6.173065751469396 ],
-					 [ 39.209950547876424, -6.173091485713492 ],
-					 [ 39.209907347026913, -6.173136753420477 ],
-					 [ 39.209882471824464, -6.173155729562787 ],
-					 [ 39.209827396884236, -6.173185431913843 ],
-					 [ 39.209797875210384, -6.173195792437345 ],
-					 [ 39.209736317298372, -6.173207021959363 ],
-					 [ 39.209705038940257, -6.17320775270383 ], 
-					 [ 39.209643023773779, -6.173199410172974 ],
-					 [ 39.209613050475006, -6.173190439608047 ],
-					 [ 39.209556648530587, -6.17316334164934 ], 
-					 [ 39.209530914286496, -6.173145547876413 ],
-					 [ 39.20948564657953, -6.173102347026916 ], 
-					 [ 39.209466670437216, -6.173077471824462 ],
-					 [ 39.209436968086152, -6.173022396884209 ],
-					 [ 39.209426607562655, -6.172992875210359 ],
-					 [ 39.20941857044528, -6.172962538145656 ], 
-					 [ 39.209383306190695, -6.172769226811716 ],
-					 [ 39.209350635218151, -6.172605214774232 ],
-
-					 [ 39.209309109396067, -6.172444648262177 ],
-					 [ 39.209288550524214, -6.172375529521074 ],
-					 [ 39.209281701778821, -6.172342562584084 ],
-					 [ 39.209277666772572, -6.172309254782388 ],
-					 [ 39.209276445505452, -6.172275606115985 ],
-					 [ 39.20928964550545, -6.172000806115984 ], 
-					 [ 39.209293606134551, -6.171969673397267 ],
-					 [ 39.209294855598372, -6.171963666413105 ],
-					 [ 39.20929620851102, -6.17196394782144 ] 
-				]
-			]
-		}
-	}
-});
-
-});
-
-//BUFFER2 POLGON
-map.on('load', function () {
-map.addSource('buffer2', {
-'type': 'geojson',
-'data': {
-'type': 'Feature',
-'geometry': {
-'type': 'Polygon',
-'coordinates': [
-				[
-					[ 39.216562232851672, -6.166998592314277 ],
-					 [ 39.216567008318208, -6.166975954981796 ], 
-					 [ 39.216574408318202, -6.166951554981796 ], 
-					 [ 39.216582930122073, -6.166928614768331 ],
-					 [ 39.216592230122075, -6.166907614768331 ], 
-					 [ 39.216617062945353, -6.166870631899531 ], 
-					 [ 39.216620491286747, -6.1668526891782 ],
-					 [ 39.216623000905486, -6.166826338181451 ],
-					 [ 39.216644009123208, -6.166754285497849 ], 
-					 [ 39.216664809123209, -6.166713585497848 ],
-					 [ 39.216699804254219, -6.16666487309658 ], 
-					 [ 39.216743180895065, -6.166632116998668 ],
-					 [ 39.216769610455493, -6.166575104285757 ],
-					 [ 39.216815331557818, -6.166527528273485 ],
-					 [ 39.216872331557816, -6.166485128273485 ],
-					 [ 39.216933625260168, -6.166454217334658 ],
-					 [ 39.216991625260164, -6.166436617334658 ],
-					 [ 39.217050865028774, -6.166428003393259 ],
-					 [ 39.217153865028777, -6.166428603393259 ], 
-					 [ 39.21715454664335, -6.166428608525411 ], 
-					 [ 39.21724994155106, -6.166429489364818 ],
-					 [ 39.217325114747368, -6.16642045214996 ],
-					 [ 39.217419518466777, -6.166405698555406 ], 
-					 [ 39.217482092121088, -6.166405826939911 ],
-					 [ 39.217541563529778, -6.166425285363415 ],
-					 [ 39.217592111216995, -6.166462169099849 ],
-					 [ 39.217628787222928, -6.166512867712106 ],
-					 [ 39.217648001444594, -6.166572418466781 ], 
-					 [ 39.217647873060088, -6.166634992121091 ], 
-					 [ 39.217628414636579, -6.166694463529778 ], 
-					 [ 39.217591530900151, -6.166745011216996 ], 
-					 [ 39.217540832287888, -6.166781687222935 ], 
-					 [ 39.217481281533217, -6.166800901444595 ], 
-					 [ 39.217383381533217, -6.166816201444594 ], 
-					 [ 39.21737637183076, -6.166817170228624 ],
-					 [ 39.217284871830763, -6.166828170228625 ],
-					 [ 39.21725915335665, -6.166829591474589 ], 
-					 [ 39.217151194159719, -6.166828594621432 ],
-					 [ 39.217094818990603, -6.166828266222389 ],
-					 [ 39.217089475028907, -6.166839886727507 ],
-					 [ 39.217087978551277, -6.166842103957626 ],
-					 [ 39.217079773682144, -6.166874067205724 ], 
-					 [ 39.217045119750509, -6.166927836354393 ],
-					 [ 39.217007607478976, -6.166957990178751 ], 
-					 [ 39.217004446187865, -6.166974535253742 ],
-					 [ 39.216988492763363, -6.167023153133278 ],
-					 [ 39.216966392763361, -6.167069453133278 ],
-					 [ 39.216951713117538, -6.167090338332699 ],
-					 [ 39.216935379287598, -6.167145820731672 ],
-					 [ 39.216910179287602, -6.167197820731672 ],
-					 [ 39.216874417785924, -6.167249168503718 ],
-					 [ 39.216824539242538, -6.167286952225156 ],
-					 [ 39.216765426116787, -6.167307473362079 ],
-					 [ 39.216702864813293, -6.167308723162622 ],
-					 [ 39.216642979268329, -6.167290579287605 ],
-					 [ 39.216591631496286, -6.167254817785926 ],
-					 [ 39.216553847774847, -6.167204939242537 ],
-					 [ 39.216533326637922, -6.167145826116788 ],
-					 [ 39.216532076837375, -6.167083264813293 ],
-					 [ 39.216550220712399, -6.167023379268328 ],
-					 [ 39.216562232851672, -6.166998592314277 ] 
-				]
-			]
-		}
-	}
-});
-
-});
 
 //EVENTS
 map.on('mouseenter', 'route1', function () {
@@ -2170,13 +1792,45 @@ map.on('mouseenter', 'route10', function () {
 });
 map.on('mouseleave', 'route10', function () {
     map.getCanvas().style.cursor = '';
+});//EVENTS
+map.on('mouseenter', 'ReddrainageSeb', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+map.on('mouseleave', 'ReddrainageSeb', function () {
+    map.getCanvas().style.cursor = '';
 });
 
 map.on('click', 'route1', function(e){
+	
 	map.addLayer({
-		'id': 'buffer1',
+		'id': 'buildingJangombe',
 		'type': 'fill',
-		'source': 'buffer1',
+		'source': 'jangombe',
+		'layout': {},
+		'paint': {
+		'fill-color': '#bf5200',
+		'fill-opacity': 0,
+		'fill-opacity-transition': {duration: 5000}
+	}
+	});
+	
+	setTimeout(function() {
+		
+	  document.getElementById("building_at_risk").style.display = "";
+	  document.getElementById("hr_risk").style.display = "";
+      map.setPaintProperty('buildingJangombe', 'fill-opacity', 0.4);
+        }, 
+        100
+    );
+	
+	
+});
+
+map.on('click', 'ReddrainageSeb', function(e){
+	map.addLayer({
+		'id': 'buildingSebleni1',
+		'type': 'fill',
+		'source': 'sebleni1',
 		'layout': {},
 		'paint': {
 		'fill-color': 'red',
@@ -2184,29 +1838,10 @@ map.on('click', 'route1', function(e){
 		'fill-opacity-transition': {duration: 5000}
 		}
 	});
-	map.addLayer({
-		'id': 'maine',
-		'type': 'fill',
-		'source': 'maine',
-		'layout': {},
-		'paint': {
-		'fill-color': '#bf5200',
-		'fill-opacity': 0,
-		'fill-opacity-transition': {duration: 5000}
-	}
-
-	});
 setTimeout(function() {
-      map.setPaintProperty('buffer1', 'fill-opacity', 0);
-        }, 
-        100
-    );
-	
-	setTimeout(function() {
-		
 	  document.getElementById("building_at_risk").style.display = "";
 	  document.getElementById("hr_risk").style.display = "";
-      map.setPaintProperty('maine', 'fill-opacity', 0.4);
+      map.setPaintProperty('buildingSebleni1', 'fill-opacity', 0.5);
         }, 
         100
     );
@@ -2216,9 +1851,9 @@ setTimeout(function() {
 
 map.on('click', 'route10', function(e){
 	map.addLayer({
-		'id': 'buffer2',
+		'id': 'buildingSebleni',
 		'type': 'fill',
-		'source': 'buffer2',
+		'source': 'sebleni',
 		'layout': {},
 		'paint': {
 		'fill-color': 'red',
@@ -2227,7 +1862,9 @@ map.on('click', 'route10', function(e){
 		}
 	});
 setTimeout(function() {
-      map.setPaintProperty('buffer2', 'fill-opacity', 0.5);
+		document.getElementById("building_at_risk").style.display = "";
+	  document.getElementById("hr_risk").style.display = "";
+      map.setPaintProperty('buildingSebleni', 'fill-opacity', 0.5);
         }, 
         100
     );
@@ -2237,11 +1874,6 @@ setTimeout(function() {
 
 
 
-
-
-//control others
-// Original ES6 Class— https://github.com/tobinbradley/mapbox-gl-pitch-toggle-control
-// export default class PitchToggle {
 class PitchToggle {
   constructor({ bearing = -17.6, pitch = 40, minpitchzoom = null }) {
     this._bearing = bearing;
@@ -2318,21 +1950,37 @@ class MapboxGLButtonControl {
   }
 }
 
-// Event Handlers 
+// Event Handlers
+
+var areax=39.217425; 
 function one(event) {
-  //alert("Event handler when clicking on \r\n" + event.target.className);
   console.log("event number 1", event);
- //rotateCamera(0);
-	var areax=39.217425;
 	//sebleni another 39.2168201,-6.166791
 	//sebleni 39.217425,-6.1630639
 	//jangombe 39.2096197,-6.1726823
 	
 	if(areax==39.217425){
-		areax=39.2168201;
+		areax=39.2168201;	
+		
 		map.flyTo({
 			center: [
 			39.2168201,-6.166791
+			],
+			essential: true // this animation is considered essential with respect to prefers-reduced-motion
+		});
+	}else if(areax==39.2168201){
+		areax=39.217425;	
+		map.flyTo({
+			center: [
+			39.217425,-6.1630639
+			],
+			essential: true // this animation is considered essential with respect to prefers-reduced-motion
+		});
+	}else {
+	
+		map.flyTo({
+			center: [
+			39.2096197,-6.1726823
 			],
 			essential: true // this animation is considered essential with respect to prefers-reduced-motion
 		});
@@ -2346,9 +1994,12 @@ const ctrlPoint = new MapboxGLButtonControl({
 
 
 
+
 /* Add Controls to the Map */
 map.addControl(new PitchToggle({ minpitchzoom: 17.5 }), "top-left");
 map.addControl(ctrlPoint, "bottom-left");
+
+
 
 function rotateCamera(timestamp) {
 	map.rotateTo((timestamp / 100) % 360, { duration: 0 });
@@ -2361,16 +2012,67 @@ var layers = map.getStyle().layers;
 	for (var i = 0; i < layers.length; i++) {
 		if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
 		// remove text labels
-		map.removeLayer(layers[i].id);
+		//map.removeLayer(layers[i].id);
 		}
 	}
 });
 
 map.on('load', function () {
-	map.addSource('maine', {
+	//add  building  source
+	map.addSource('jangombe', {
 	'type': 'geojson',
 	'data': json_building_at_risk 
 	});
+	
+	map.addSource('sebleni', {
+	'type': 'geojson',
+	'data': json_building_at_risk2 
+	});
+	
+	map.addSource('sebleni1', {
+	'type': 'geojson',
+	'data': json_building_at_risk3 
+	});
+	
+	//add drainage source n layer
+	
+	map.addSource('seblenidrain', {
+	'type': 'geojson',
+	'data': drainage2
+	});
+	
+	  map.addLayer({
+        "id": "ReddrainageSeb",
+        "type": "line",
+        "source": 'seblenidrain',
+        "layout": {
+        },
+        "paint": {
+            "line-color": "red",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation2('ReddrainageSeb');
+	
+	map.addSource('seblenidrain1', {
+	'type': 'geojson',
+	'data': drainage3
+	});
+	
+	  map.addLayer({
+        "id": "ReddrainageSeb1",
+        "type": "line",
+        "source": 'seblenidrain1',
+        "layout": {
+        },
+        "paint": {
+            "line-color": "#73B6FE",
+            "line-width": 8,
+            "line-dasharray": [0, 2, 3]
+        }
+    });
+    enableLineAnimation4('ReddrainageSeb1');
 
 });
 
