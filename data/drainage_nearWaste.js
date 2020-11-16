@@ -500,42 +500,7 @@ var drainage5 =
       },
       "id": "way/728046759"
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "@id": "way/728046760",
-        "blockage": "yes",
-        "blockage:material": "dirt",
-        "covered": "no",
-        "depth": "35 cm",
-        "material": "concrete",
-        "profile": "open_rectangular",
-        "waterway": "drain",
-        "width": "60 cm"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            39.2092643,
-            -6.1646796
-          ],
-          [
-            39.2092301,
-            -6.164644
-          ],
-          [
-            39.2088043,
-            -6.1642649
-          ],
-          [
-            39.2088398,
-            -6.1642221
-          ]
-        ]
-      },
-      "id": "way/728046760"
-    },
+    
 	{
       "type": "Feature",
       "properties": {

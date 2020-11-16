@@ -91,7 +91,7 @@ p {
 </style>
 </head>
 
-<body >
+<body>
 
   <div class="d-flex" id="wrapper">
 
@@ -237,7 +237,8 @@ p {
 mapboxgl.accessToken = 'pk.eyJ1IjoianJiYXJ0aXN0IiwiYSI6ImNrMG5uaGQ2bjAxZDQzcHM4MWx2ZDQ5amwifQ.lwP_ukc9egUxM3814xKudw';
 var map = new mapboxgl.Map({
 //style: 'mapbox://styles/mapbox/streets-v11',
-style: 'mapbox://styles/jrbartist/ckhgshg741rh719o0cojcrrhm',
+//style: 'mapbox://styles/jrbartist/ckhgshg741rh719o0cojcrrhm',
+style: 'mapbox://styles/jrbartist/ckhgsd32z1rja19md2osbjej0',
 center: [39.21013,-6.172],
 zoom: 17.5,
 pitch: 40,
@@ -331,8 +332,9 @@ dump1.features.forEach(function(marker) {
     .setLngLat(marker.geometry.coordinates)
 	.setPopup(new mapboxgl.Popup({closeOnClick: true, closeButton: false}).setText("Waste Collection at Jangombe"))
     .addTo(map)
-	.togglePopup();
+	//.togglePopup();
 	});
+	
 	
 dump2.features.forEach(function(marker) {
   var e2 = document.createElement('div');
@@ -341,7 +343,7 @@ dump2.features.forEach(function(marker) {
     .setLngLat(marker.geometry.coordinates)
 	.setPopup(new mapboxgl.Popup({closeOnClick: true, closeButton: false}).setText("Waste Collection at Amani"))
     .addTo(map)
-	.togglePopup();
+	//.togglePopup();
 	});
 	
 dump3.features.forEach(function(marker) {
@@ -351,7 +353,7 @@ dump3.features.forEach(function(marker) {
     .setLngLat(marker.geometry.coordinates)
 	.setPopup(new mapboxgl.Popup({closeOnClick: true, closeButton: false}).setText("Waste Collection at Sebleni"))
     .addTo(map)
-	.togglePopup();
+	//.togglePopup();
 	});
 	
 dump4.features.forEach(function(marker) {
@@ -361,7 +363,7 @@ dump4.features.forEach(function(marker) {
     .setLngLat(marker.geometry.coordinates)
 	.setPopup(new mapboxgl.Popup({closeOnClick: true, closeButton: false}).setText("Waste Collection at Kwaalimsha"))
     .addTo(map)
-	.togglePopup();
+	//.togglePopup();
 	});
 	
 
@@ -1800,6 +1802,13 @@ map.on('mouseleave', 'ReddrainageSeb', function () {
     map.getCanvas().style.cursor = '';
 });
 
+map.on('mouseenter', 'drainkwaali1', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+map.on('mouseleave', 'drainkwaali1', function () {
+    map.getCanvas().style.cursor = '';
+});
+
 map.on('click', 'route1', function(e){
 	
 	map.addLayer({
@@ -1868,8 +1877,27 @@ setTimeout(function() {
         }, 
         100
     );
-	
-	
+});
+
+map.on('click', 'drainkwaali1', function(e){
+	map.addLayer({
+		'id': 'buildingKwaalimsha',
+		'type': 'fill',
+		'source': 'kwaalimshabui',
+		'layout': {},
+		'paint': {
+		'fill-color': 'red',
+		 'fill-opacity': 0,
+		'fill-opacity-transition': {duration: 5000}
+		}
+	});
+setTimeout(function() {
+		document.getElementById("building_at_risk").style.display = "";
+	  document.getElementById("hr_risk").style.display = "";
+      map.setPaintProperty('buildingKwaalimsha', 'fill-opacity', 0.5);
+        }, 
+        100
+    );
 });
 
 
@@ -1993,6 +2021,7 @@ function one(event) {
 		});
 	}
 }
+
 const ctrlPoint = new MapboxGLButtonControl({
   className: "mapbox-gl-draw_point ",
   title: "Move Next Area",
@@ -2024,6 +2053,7 @@ var layers = map.getStyle().layers;
 	}
 });
 
+
 map.on('load', function () {
 	//add  building  source
 	map.addSource('jangombe', {
@@ -2039,6 +2069,11 @@ map.on('load', function () {
 	map.addSource('sebleni1', {
 	'type': 'geojson',
 	'data': json_building_at_risk3 
+	});
+	
+	map.addSource('kwaalimshabui', {
+	'type': 'geojson',
+	'data': json_building_at_risk4 
 	});
 	
 	//add drainage source n layer
